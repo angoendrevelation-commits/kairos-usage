@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-11T22:22+08:00",
+ "generated_at": "2026-11-11T22:52+08:00",
  "codex": {
   "limits": {
    "as_of": "2026-11-11T13:57+08:00",
@@ -46,8 +46,8 @@
    "billing": "stripe_subscription",
    "subscription_created": "2026-06-04T18:28+08:00"
   },
-  "sessions": 27,
-  "tokens_total": 14227240
+  "sessions": 30,
+  "tokens_total": 18073238
  },
  "grokbot": {
   "as_of": "2026-11-11T00:38+08:00",
@@ -142,7 +142,7 @@
   },
   "其他／未分類": {
    "Codex CLI": 104838,
-   "Claude Code": 3616544
+   "Claude Code": 4844667
   },
   "用量探測": {
    "Codex CLI": 0,
@@ -158,7 +158,11 @@
   },
   "末日 IG（其他）": {
    "Codex CLI": 0,
-   "Claude Code": 9762179
+   "Claude Code": 12284650
+  },
+  "末日 IG／輪播貼文": {
+   "Codex CLI": 0,
+   "Claude Code": 95404
   }
  }
 }
