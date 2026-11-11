@@ -1,0 +1,164 @@
+{
+ "generated_at": "2026-11-11T09:53+08:00",
+ "codex": {
+  "limits": {
+   "as_of": "2026-11-11T09:50+08:00",
+   "plan": "plus",
+   "five_hour": {
+    "used_pct": 16.0,
+    "left_pct": 84.0,
+    "window_min": 300,
+    "resets_at": "2026-11-11T12:29+08:00"
+   },
+   "weekly": {
+    "used_pct": 59.0,
+    "left_pct": 41.0,
+    "window_min": 10080,
+    "resets_at": "2026-11-11T20:27+08:00"
+   },
+   "credits_balance": "0"
+  },
+  "sessions": 35,
+  "tokens_total": 15234729
+ },
+ "claude": {
+  "limits": {
+   "as_of": "2026-11-11T00:39+08:00",
+   "source": "probe（claude -p stream-json rate_limit_event）",
+   "windows": {
+    "five_hour": {
+     "used_pct": 6.0,
+     "left_pct": 94.0,
+     "resets_at": "2026-11-11T01:00+08:00",
+     "status": "allowed"
+    },
+    "seven_day": {
+     "used_pct": 29.0,
+     "left_pct": 71.0,
+     "resets_at": "2026-11-11T05:00+08:00",
+     "status": "allowed"
+    }
+   },
+   "overage": "rejected"
+  },
+  "plan": {
+   "org_type": "claude_pro",
+   "billing": "stripe_subscription",
+   "subscription_created": "2026-06-04T18:28+08:00"
+  },
+  "sessions": 16,
+  "tokens_total": 8620452
+ },
+ "grokbot": {
+  "as_of": "2026-11-11T00:38+08:00",
+  "plan": "Premium",
+  "weekly_used_pct": 0,
+  "weekly_resets_at": "2026-11-17T23:46+08:00",
+  "note": "每週上限與方案內其他 App 共用；週上限剛於 11/10 23:46 重置",
+  "period": "last_7_days（11/3–11/10 UTC）",
+  "bots": [
+   {
+    "name": "Gray",
+    "share_pct": 54
+   },
+   {
+    "name": "SHIELD｜品質與安全審核官",
+    "share_pct": 18
+   },
+   {
+    "name": "ECHO｜社群訊號官",
+    "share_pct": 14
+   },
+   {
+    "name": "CODEX｜程式開發工程師",
+    "share_pct": 7
+   },
+   {
+    "name": "BEACON｜市場情報官",
+    "share_pct": 6
+   },
+   {
+    "name": "PULSE｜行政管家",
+    "share_pct": 1
+   },
+   {
+    "name": "LEDGER｜資產管家",
+    "share_pct": 0.5
+   }
+  ],
+  "routines": [
+   {
+    "name": "ECHO / X 推文市場警示",
+    "share_pct": 11,
+    "runs_per_week": 84
+   },
+   {
+    "name": "BEACON / 每日市場日報",
+    "share_pct": 5,
+    "runs_per_week": 7
+   },
+   {
+    "name": "PULSE / 晚上 8 點明日待辦",
+    "share_pct": 1,
+    "runs_per_week": 7
+   },
+   {
+    "name": "Gray / 額度 80% 通知",
+    "share_pct": 0.5,
+    "runs_per_week": 35
+   }
+  ],
+  "by_day": {
+   "11/3": 2,
+   "11/4": 49,
+   "11/5": 10,
+   "11/6": 4,
+   "11/7": 5,
+   "11/9": 2,
+   "11/10": 28
+  }
+ },
+ "manual": {
+  "chatgpt_web": {
+   "status": "需瀏覽器讀取，尚未接上",
+   "plan": "Plus（同 Codex 帳號，plan_type=plus）",
+   "renewal": null
+  },
+  "gemini_web": {
+   "status": "需瀏覽器讀取，尚未接上",
+   "plan": "Pro",
+   "veo_note": "影片額度 11/10 用完 4 支，11/11 03:06 重置（Gray 先前觀察）",
+   "renewal": null
+  },
+  "colab": {
+   "status": "需瀏覽器讀取，尚未接上",
+   "renewal": null
+  }
+ },
+ "by_category_tokens": {
+  "投資系統": {
+   "Codex CLI": 15006060,
+   "Claude Code": 0
+  },
+  "其他／未分類": {
+   "Codex CLI": 104838,
+   "Claude Code": 2615634
+  },
+  "用量探測": {
+   "Codex CLI": 0,
+   "Claude Code": 441072
+  },
+  "記憶維護": {
+   "Codex CLI": 0,
+   "Claude Code": 127285
+  },
+  "品質審核": {
+   "Codex CLI": 123831,
+   "Claude Code": 0
+  },
+  "末日 IG（其他）": {
+   "Codex CLI": 0,
+   "Claude Code": 5436461
+  }
+ }
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="AI 用量">
+<meta name="robots" content="noindex">
+<title>AI 模型用量</title>
+<style>
+  :root { --bg:#F5F6F8; --card:#FFFFFF; --ink:#14171F; --ink2:#4B5563; --ink3:#6B7280; --line:#D5D9E0; --line-soft:#E6E9EE; --danger:#B42318; --neutral-bar:#5B6678;
+    --font:"PingFang TC","Noto Sans TC","Microsoft JhengHei","Heiti TC",system-ui,-apple-system,"Segoe UI",sans-serif; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--font); font-size:15px; line-height:1.5; -webkit-text-size-adjust:100%; }
+  main { max-width:1200px; margin:0 auto; padding:24px 12px 48px; display:flex; flex-direction:column; gap:24px; }
+  h1 { font-size:22px; line-height:1.3; margin:0; font-weight:600; }
+  h2 { font-size:18px; line-height:1.3; margin:0 0 4px; font-weight:600; }
+  p { margin:0; }
+  .sub { color:var(--ink2); font-size:14px; margin-top:2px; }
+  .cap { color:var(--ink2); font-size:14px; margin-bottom:12px; }
+  .card { background:var(--card); border:1px solid var(--line-soft); border-radius:16px; padding:16px; }
+  .row { display:flex; flex-wrap:wrap; align-items:baseline; }
+  .hero { display:flex; flex-direction:column; gap:8px; }
+  .hero .k { font-size:15px; color:var(--ink2); }
+  .hero .big { font-size:56px; line-height:1.05; font-weight:600; margin-right:12px; }
+  .hero .who { font-size:20px; font-weight:600; }
+  .hero .cd { font-size:17px; font-weight:600; }
+  .q { display:flex; flex-direction:column; gap:8px; }
+  .q .lab { font-size:15px; font-weight:600; margin-right:8px; }
+  .num { font-size:15px; margin-right:8px; }
+  .q .stop { font-size:15px; font-weight:600; color:var(--danger); }
+  .muted { font-size:15px; color:var(--ink3); }
+  .track { position:relative; height:14px; border-radius:9999px; border:1px solid var(--line); background:transparent; overflow:hidden; }
+  .track.empty { background:#EEF0F3; border-color:var(--line-soft); }
+  .fill { height:100%; }
+  .tw { position:relative; margin:4px 0; }
+  .stopline { position:absolute; top:-4px; bottom:-4px; left:90%; width:2px; background:repeating-linear-gradient(to bottom,var(--ink2) 0 3px,transparent 3px 6px); }
+  .when { font-size:14px; color:var(--ink2); margin-right:12px; }
+  .cd { font-size:15px; font-weight:600; }
+  .c-soon { color:#15803D; } .c-day { color:#7C3AED; } .c-far, .c-done { color:#6B7280; }
+  .grid { display:grid; grid-template-columns:1fr; gap:12px; }
+  .tool { display:flex; flex-direction:column; gap:16px; }
+  .tool .name { font-size:20px; font-weight:600; margin-right:8px; }
+  .tool .plan { font-size:15px; color:var(--ink2); }
+  .tool .foot { display:flex; flex-direction:column; gap:4px; font-size:14px; color:var(--ink2); }
+  .tool .foot .asof { font-size:13px; color:var(--ink3); }
+  .legend { display:flex; flex-direction:column; gap:16px; margin-bottom:12px; }
+  .legend .grp { display:flex; flex-direction:column; gap:8px; font-size:14px; }
+  .legend .h { font-weight:600; color:var(--ink2); }
+  .legend .two { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 12px; }
+  .legend .wrap { display:flex; flex-wrap:wrap; gap:8px 16px; }
+  .legend .it { display:flex; align-items:center; }
+  .sw { display:inline-block; flex-shrink:0; width:14px; height:14px; border-radius:9999px; margin-right:6px; }
+  .sw.dash { width:2px; height:18px; border-radius:0; margin:0 6px; background:repeating-linear-gradient(to bottom,var(--ink2) 0 3px,transparent 3px 6px); }
+  .bars { display:flex; flex-direction:column; gap:12px; }
+  .bar .top { display:flex; flex-wrap:wrap; justify-content:space-between; gap:2px 12px; font-size:15px; }
+  .bar .top b { font-weight:600; }
+  .bar .meta { font-size:13px; color:var(--ink3); }
+  .bar .bt { height:10px; border-radius:9999px; background:#E9ECF1; margin-top:6px; overflow:hidden; }
+  .bar .bf { height:100%; background:var(--neutral-bar); border-radius:9999px; }
+  .spend p { font-size:15px; margin:0 0 12px; }
+  .spend p.cap { font-size:14px; }
+  .spend .bars { margin-bottom:24px; }
+  .spend .bars:last-child { margin-bottom:0; }
+  table { width:100%; border-collapse:collapse; font-size:15px; }
+  th, td { text-align:left; padding:8px 0; border-top:1px solid var(--line-soft); vertical-align:top; }
+  th { font-size:13px; color:var(--ink2); font-weight:600; border-top:0; }
+  td:first-child, th:first-child { padding-right:12px; }
+  code { font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:14px; overflow-wrap:anywhere; }
+  @media (min-width:768px) {
+    main { padding:32px 24px 64px; }
+    .grid { grid-template-columns:repeat(3,1fr); gap:24px; }
+    .card { padding:20px; }
+    .hero .big { font-size:72px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>AI 模型用量</h1>
+    <p class="sub">資料時間 2026-11-11 09:53（台北時間）</p>
+  </header>
+
+  <section class="card hero" aria-label="最緊的額度"><span class="k">最緊的額度</span><div class="row"><span class="big">59%</span><span class="who">Codex CLI 每週</span></div><div class="tw"><div class="track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="59"><div class="fill" style="width:59%;background:#F28C28"></div></div><div class="stopline"></div></div><div class="row"><span class="num" style="margin-right:12px">剩 41%</span><span class="when" style="margin-right:12px;color:var(--ink2)">11/11（三）20:27 重置</span><span class="cd c-day" data-reset="2026-11-11T20:27+08:00">剩 10 小時 33 分</span></div></section>
+
+  <section>
+    <h2>各工具額度</h2>
+    <div class="legend" aria-label="圖例">
+      <div class="grp"><span class="h">用量</span>
+        <div class="two">
+          <span class="it"><i class="sw" style="background:#2F6FEB"></i>0–49%</span>
+          <span class="it"><i class="sw" style="background:#F28C28"></i>50–74%</span>
+          <span class="it"><i class="sw" style="background:#E5484D"></i>75–89%</span>
+          <span class="it"><i class="sw" style="background:#8B1A1A"></i>90% 以上・已達停止線</span>
+        </div>
+        <span class="it"><i class="sw dash"></i>90% 停止線</span>
+      </div>
+      <div class="grp"><span class="h">距離重置</span>
+        <div class="wrap">
+          <span class="it"><i class="sw" style="background:#15803D"></i>6 小時內</span>
+          <span class="it"><i class="sw" style="background:#7C3AED"></i>6–24 小時</span>
+          <span class="it"><i class="sw" style="background:#6B7280"></i>超過 24 小時</span>
+        </div>
+      </div>
+    </div>
+    <div class="grid"><article class="card tool"><div class="row"><span class="name">Codex CLI</span><span class="plan">ChatGPT Plus</span></div><div class="q"><div class="row"><span class="lab">5 小時</span><span class="num">已用 16%　剩 84%</span></div><div class="tw"><div class="track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="16"><div class="fill" style="width:16%;background:#2F6FEB"></div></div><div class="stopline"></div></div><div class="row"><span class="when">11/11（三）12:29 重置</span><span class="cd c-soon" data-reset="2026-11-11T12:29+08:00">剩 2 小時 35 分</span></div></div><div class="q"><div class="row"><span class="lab">每週</span><span class="num">已用 59%　剩 41%</span></div><div class="tw"><div class="track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="59"><div class="fill" style="width:59%;background:#F28C28"></div></div><div class="stopline"></div></div><div class="row"><span class="when">11/11（三）20:27 重置</span><span class="cd c-day" data-reset="2026-11-11T20:27+08:00">剩 10 小時 33 分</span></div></div><div class="foot"><span>加購點數 0</span><span>訂閱到期：未知，待補</span><span class="asof">資料時間 11/11 09:50</span></div></article><article class="card tool"><div class="row"><span class="name">Claude Code</span><span class="plan">Pro</span></div><div class="q"><div class="row"><span class="lab">5 小時</span><span class="num">已用 6%　剩 94%</span></div><div class="tw"><div class="track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="6"><div class="fill" style="width:6%;background:#2F6FEB"></div></div><div class="stopline"></div></div><div class="row"><span class="when">11/11（三）01:00 重置</span><span class="cd c-done" data-reset="2026-11-11T01:00+08:00">已重置，待更新數字</span></div></div><div class="q"><div class="row"><span class="lab">每週</span><span class="num">已用 29%　剩 71%</span></div><div class="tw"><div class="track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="29"><div class="fill" style="width:29%;background:#2F6FEB"></div></div><div class="stopline"></div></div><div class="row"><span class="when">11/11（三）05:00 重置</span><span class="cd c-done" data-reset="2026-11-11T05:00+08:00">已重置，待更新數字</span></div></div><div class="foot"><span>超額使用：組織已關閉</span><span>訂閱到期：未知，待補（2026-06-04 開始訂閱）</span><span class="asof">資料時間 11/11 00:39</span></div></article><article class="card tool"><div class="row"><span class="name">Grok Bot</span><span class="plan">Premium</span></div><div class="q"><div class="row"><span class="lab">5 小時</span><span class="muted">沒有 5 小時限制</span></div><div class="track empty"></div></div><div class="q"><div class="row"><span class="lab">每週</span><span class="num">已用 0%　剩 100%</span></div><div class="tw"><div class="track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" style="width:0%;background:#2F6FEB"></div></div><div class="stopline"></div></div><div class="row"><span class="when">11/17（二）23:46 重置</span><span class="cd c-far" data-reset="2026-11-17T23:46+08:00">剩 6 天 13 小時</span></div></div><div class="foot"><span>每週上限與方案內其他 App 共用；週上限剛於 11/10 23:46 重置</span><span>訂閱到期：未知，待補</span><span class="asof">資料時間 11/11 00:38</span></div></article><article class="card tool"><div class="row"><span class="name">ChatGPT 網頁</span><span class="plan">Plus（同 Codex 帳號，plan_type=plus）</span></div><div class="q"><div class="row"><span class="lab">5 小時</span><span class="muted">尚未接上</span></div><div class="track empty"></div></div><div class="q"><div class="row"><span class="lab">每週</span><span class="muted">尚未接上</span></div><div class="track empty"></div></div><div class="foot"><span>需瀏覽器讀取，尚未接上</span><span>訂閱到期：未知，待補</span></div></article><article class="card tool"><div class="row"><span class="name">Gemini 網頁</span><span class="plan">Pro</span></div><div class="q"><div class="row"><span class="lab">5 小時</span><span class="muted">尚未接上</span></div><div class="track empty"></div></div><div class="q"><div class="row"><span class="lab">每週</span><span class="muted">尚未接上</span></div><div class="track empty"></div></div><div class="foot"><span>需瀏覽器讀取，尚未接上</span><span>Veo：影片額度 11/10 用完 4 支，11/11 03:06 重置（Gray 先前觀察）</span><span>訂閱到期：未知，待補</span></div></article><article class="card tool"><div class="row"><span class="name">Google Colab</span></div><div class="q"><div class="row"><span class="lab">5 小時</span><span class="muted">尚未接上</span></div><div class="track empty"></div></div><div class="q"><div class="row"><span class="lab">每週</span><span class="muted">尚未接上</span></div><div class="track empty"></div></div><div class="foot"><span>需瀏覽器讀取，尚未接上</span><span>訂閱到期：未知，待補</span></div></article></div>
+  </section>
+
+  <section class="card spend">
+    <h2>花在哪裡</h2>
+    <p class="cap">長條只表示占比或數量，不代表額度等級。</p>
+    <p>Grok Bot 各 agent 占比（last_7_days（11/3–11/10 UTC））。最高的一天是 11/4（49%）。</p><div class="bars"><div class="bar"><div class="top"><b>Gray</b><span>54%</span></div><div class="meta">含 額度 80% 通知 0.5%，每週約 35 次</div><div class="bt"><div class="bf" style="width:100%"></div></div></div><div class="bar"><div class="top"><b>SHIELD｜品質與安全審核官</b><span>18%</span></div><div class="bt"><div class="bf" style="width:33.3333%"></div></div></div><div class="bar"><div class="top"><b>ECHO｜社群訊號官</b><span>14%</span></div><div class="meta">含 X 推文市場警示 11%，每週約 84 次</div><div class="bt"><div class="bf" style="width:25.9259%"></div></div></div><div class="bar"><div class="top"><b>CODEX｜程式開發工程師</b><span>7%</span></div><div class="bt"><div class="bf" style="width:12.963%"></div></div></div><div class="bar"><div class="top"><b>BEACON｜市場情報官</b><span>6%</span></div><div class="meta">含 每日市場日報 5%，每週約 7 次</div><div class="bt"><div class="bf" style="width:11.1111%"></div></div></div><div class="bar"><div class="top"><b>PULSE｜行政管家</b><span>1%</span></div><div class="meta">含 晚上 8 點明日待辦 1%，每週約 7 次</div><div class="bt"><div class="bf" style="width:1.85185%"></div></div></div><div class="bar"><div class="top"><b>LEDGER｜資產管家</b><span>&lt;1%</span></div><div class="bt"><div class="bf" style="width:0.925926%"></div></div></div></div><p class="cap">Grok Bot 數字資料時間 2026-11-11 00:38，來自 grokbot.json，不是即時。</p><p>Codex CLI ＋ Claude Code 依工作分類的 tokens（含快取輸入 tokens），合計 23,855,181（Codex CLI 15,234,729、Claude Code 8,620,452）。</p><div class="bars"><div class="bar"><div class="top"><b>投資系統</b><span>15,006,060</span></div><div class="meta">Codex CLI 15,006,060</div><div class="bt"><div class="bf" style="width:100%"></div></div></div><div class="bar"><div class="top"><b>末日 IG（其他）</b><span>5,436,461</span></div><div class="meta">Claude Code 5,436,461</div><div class="bt"><div class="bf" style="width:36.2284%"></div></div></div><div class="bar"><div class="top"><b>其他／未分類</b><span>2,720,472</span></div><div class="meta">Codex CLI 104,838、Claude Code 2,615,634</div><div class="bt"><div class="bf" style="width:18.1292%"></div></div></div><div class="bar"><div class="top"><b>用量探測</b><span>441,072</span></div><div class="meta">Claude Code 441,072</div><div class="bt"><div class="bf" style="width:2.93929%"></div></div></div><div class="bar"><div class="top"><b>記憶維護</b><span>127,285</span></div><div class="meta">Claude Code 127,285</div><div class="bt"><div class="bf" style="width:0.848224%"></div></div></div><div class="bar"><div class="top"><b>品質審核</b><span>123,831</span></div><div class="meta">Codex CLI 123,831</div><div class="bt"><div class="bf" style="width:0.825207%"></div></div></div></div>
+  </section>
+
+  <section class="card">
+    <h2>尚未接上</h2>
+    <p>ChatGPT 網頁、Gemini 網頁、Google Colab 需要瀏覽器讀取，目前沒有數字，寫在 manual.json。</p>
+  </section>
+
+  <section class="card">
+    <h2>資料怎麼更新</h2>
+    <table>
+      <thead><tr><th>項目</th><th>做法</th></tr></thead>
+      <tbody>
+        <tr><td>Codex、Claude 額度與 tokens</td><td><code>collect.py</code> 每 30 分鐘自動執行，寫出 snapshot.json</td></tr>
+        <tr><td>本頁</td><td><code>publish.py</code> 每小時從 snapshot.json 重新產生</td></tr>
+        <tr><td>Claude 的限制數字</td><td>要加 <code>--probe-claude</code> 才會刷新（會耗少量額度），自動排程不加；各工具卡片上的資料時間就是最後一次取得的時間</td></tr>
+        <tr><td>Grok Bot 數字</td><td>來自 <code>grokbot.json</code>；若資料時間較舊，頁面如實顯示，不是即時</td></tr>
+        <tr><td>網頁工具</td><td>寫在 <code>manual.json</code></td></tr>
+        <tr><td>工作分類規則</td><td><code>categories.yaml</code></td></tr>
+      </tbody>
+    </table>
+    <p class="cap" style="margin:12px 0 0">頁面上的倒數每 30 秒依現在時間重算；數字本身以上方資料時間為準。</p>
+  </section>
+</main>
+<script>
+(function () {
+  var HOUR = 3600000, DAY = 24 * HOUR;
+  function countdown(iso, now) {
+    var ms = Date.parse(iso) - now;
+    if (isNaN(ms)) return null;
+    if (ms <= 0) return { key: "done", text: "已重置，待更新數字" };
+    var days = Math.floor(ms / DAY), hours = Math.floor((ms % DAY) / HOUR), mins = Math.floor((ms % HOUR) / 60000);
+    var key = ms < 6 * HOUR ? "soon" : ms <= DAY ? "day" : "far";
+    var text = days >= 1 ? "剩 " + days + " 天 " + hours + " 小時"
+      : ms < HOUR ? (mins < 1 ? "剩 不到 1 分" : "剩 " + mins + " 分")
+      : "剩 " + hours + " 小時 " + mins + " 分";
+    return { key: key, text: text };
+  }
+  function tick() {
+    var now = Date.now(), els = document.querySelectorAll("[data-reset]");
+    for (var i = 0; i < els.length; i++) {
+      var c = countdown(els[i].getAttribute("data-reset"), now);
+      if (!c) continue;
+      els[i].className = "cd c-" + c.key;
+      els[i].textContent = c.text;
+    }
+  }
+  tick();
+  setInterval(tick, 30000);
+})();
+</script>
+</body>
+</html>
