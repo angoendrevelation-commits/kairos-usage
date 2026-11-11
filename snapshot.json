@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-11T22:54+08:00",
+ "generated_at": "2026-11-11T23:41+08:00",
  "codex": {
   "limits": {
    "as_of": "2026-11-11T13:57+08:00",
@@ -23,19 +23,18 @@
  },
  "claude": {
   "limits": {
-   "as_of": "2026-11-11T00:39+08:00",
-   "source": "probe（claude -p stream-json rate_limit_event）",
+   "as_of": "2026-11-11T23:37+08:00",
    "windows": {
     "five_hour": {
-     "used_pct": 6.0,
-     "left_pct": 94.0,
-     "resets_at": "2026-11-11T01:00+08:00",
+     "used_pct": 17.0,
+     "left_pct": 83.0,
+     "resets_at": "2026-11-12T02:50+08:00",
      "status": "allowed"
     },
     "seven_day": {
-     "used_pct": 29.0,
-     "left_pct": 71.0,
-     "resets_at": "2026-11-11T05:00+08:00",
+     "used_pct": 3.0,
+     "left_pct": 97.0,
+     "resets_at": "2026-11-18T05:00+08:00",
      "status": "allowed"
     }
    },
@@ -46,8 +45,8 @@
    "billing": "stripe_subscription",
    "subscription_created": "2026-06-04T18:28+08:00"
   },
-  "sessions": 31,
-  "tokens_total": 18130270
+  "sessions": 33,
+  "tokens_total": 18894385
  },
  "grokbot": {
   "as_of": "2026-11-11T00:38+08:00",
@@ -142,15 +141,15 @@
   },
   "其他／未分類": {
    "Codex CLI": 104838,
-   "Claude Code": 4844667
+   "Claude Code": 5359643
   },
   "用量探測": {
    "Codex CLI": 0,
-   "Claude Code": 721232
+   "Claude Code": 867192
   },
   "記憶維護": {
    "Codex CLI": 0,
-   "Claude Code": 184317
+   "Claude Code": 287496
   },
   "品質審核": {
    "Codex CLI": 123831,
