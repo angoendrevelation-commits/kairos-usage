@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-11-11T09:53+08:00",
+ "generated_at": "2026-11-11T10:46+08:00",
  "codex": {
   "limits": {
-   "as_of": "2026-11-11T09:50+08:00",
+   "as_of": "2026-11-11T10:39+08:00",
    "plan": "plus",
    "five_hour": {
-    "used_pct": 16.0,
-    "left_pct": 84.0,
+    "used_pct": 33.0,
+    "left_pct": 67.0,
     "window_min": 300,
     "resets_at": "2026-11-11T12:29+08:00"
    },
    "weekly": {
-    "used_pct": 59.0,
-    "left_pct": 41.0,
+    "used_pct": 62.0,
+    "left_pct": 38.0,
     "window_min": 10080,
     "resets_at": "2026-11-11T20:27+08:00"
    },
    "credits_balance": "0"
   },
-  "sessions": 35,
-  "tokens_total": 15234729
+  "sessions": 37,
+  "tokens_total": 19363793
  },
  "claude": {
   "limits": {
@@ -46,8 +46,8 @@
    "billing": "stripe_subscription",
    "subscription_created": "2026-06-04T18:28+08:00"
   },
-  "sessions": 16,
-  "tokens_total": 8620452
+  "sessions": 18,
+  "tokens_total": 9482779
  },
  "grokbot": {
   "as_of": "2026-11-11T00:38+08:00",
@@ -137,12 +137,12 @@
  },
  "by_category_tokens": {
   "投資系統": {
-   "Codex CLI": 15006060,
+   "Codex CLI": 19135124,
    "Claude Code": 0
   },
   "其他／未分類": {
    "Codex CLI": 104838,
-   "Claude Code": 2615634
+   "Claude Code": 3477961
   },
   "用量探測": {
    "Codex CLI": 0,
