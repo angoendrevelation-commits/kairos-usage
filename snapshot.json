@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-11T20:57+08:00",
+ "generated_at": "2026-11-11T22:22+08:00",
  "codex": {
   "limits": {
    "as_of": "2026-11-11T13:57+08:00",
@@ -46,8 +46,8 @@
    "billing": "stripe_subscription",
    "subscription_created": "2026-06-04T18:28+08:00"
   },
-  "sessions": 26,
-  "tokens_total": 14171416
+  "sessions": 27,
+  "tokens_total": 14227240
  },
  "grokbot": {
   "as_of": "2026-11-11T00:38+08:00",
@@ -146,7 +146,7 @@
   },
   "用量探測": {
    "Codex CLI": 0,
-   "Claude Code": 665408
+   "Claude Code": 721232
   },
   "記憶維護": {
    "Codex CLI": 0,
