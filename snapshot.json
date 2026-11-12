@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T14:03+08:00",
+ "generated_at": "2026-11-12T18:06+08:00",
  "codex": {
   "limits": {
    "as_of": "2026-11-11T13:57+08:00",
@@ -23,17 +23,17 @@
  },
  "claude": {
   "limits": {
-   "as_of": "2026-11-11T23:37+08:00",
+   "as_of": "2026-11-12T18:06+08:00",
    "windows": {
     "five_hour": {
-     "used_pct": 17.0,
-     "left_pct": 83.0,
-     "resets_at": "2026-11-12T02:50+08:00",
+     "used_pct": 8.0,
+     "left_pct": 92.0,
+     "resets_at": "2026-11-12T20:50+08:00",
      "status": "allowed"
     },
     "seven_day": {
-     "used_pct": 3.0,
-     "left_pct": 97.0,
+     "used_pct": 6.0,
+     "left_pct": 94.0,
      "resets_at": "2026-11-18T05:00+08:00",
      "status": "allowed"
     }
@@ -45,8 +45,8 @@
    "billing": "stripe_subscription",
    "subscription_created": "2026-06-04T18:28+08:00"
   },
-  "sessions": 48,
-  "tokens_total": 25995294
+  "sessions": 56,
+  "tokens_total": 28506634
  },
  "grokbot": {
   "as_of": "2026-11-11T00:38+08:00",
@@ -141,11 +141,11 @@
   },
   "其他／未分類": {
    "Codex CLI": 104838,
-   "Claude Code": 8180843
+   "Claude Code": 8546095
   },
   "用量探測": {
    "Codex CLI": 0,
-   "Claude Code": 1426745
+   "Claude Code": 1822457
   },
   "記憶維護": {
    "Codex CLI": 0,
@@ -157,7 +157,7 @@
   },
   "末日 IG（其他）": {
    "Codex CLI": 0,
-   "Claude Code": 16004806
+   "Claude Code": 17755182
   },
   "末日 IG／輪播貼文": {
    "Codex CLI": 0,
