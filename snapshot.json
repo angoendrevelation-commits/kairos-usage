@@ -1,39 +1,39 @@
 {
- "generated_at": "2026-11-13T01:57+08:00",
+ "generated_at": "2026-11-13T19:56+08:00",
  "codex": {
   "limits": {
-   "as_of": "2026-11-11T13:57+08:00",
+   "as_of": "2026-11-13T09:02+08:00",
    "plan": "plus",
    "five_hour": {
-    "used_pct": 0.0,
-    "left_pct": 100.0,
+    "used_pct": 2.0,
+    "left_pct": 98.0,
     "window_min": 300,
-    "resets_at": "2026-11-11T18:57+08:00"
+    "resets_at": "2026-11-13T14:00+08:00"
    },
    "weekly": {
-    "used_pct": 67.0,
-    "left_pct": 33.0,
+    "used_pct": 14.0,
+    "left_pct": 86.0,
     "window_min": 10080,
-    "resets_at": "2026-11-11T20:27+08:00"
+    "resets_at": "2026-11-18T23:56+08:00"
    },
    "credits_balance": "0"
   },
-  "sessions": 44,
-  "tokens_total": 26996522
+  "sessions": 45,
+  "tokens_total": 27242036
  },
  "claude": {
   "limits": {
-   "as_of": "2026-11-12T18:06+08:00",
+   "as_of": "2026-11-13T19:56+08:00",
    "windows": {
     "five_hour": {
-     "used_pct": 8.0,
-     "left_pct": 92.0,
-     "resets_at": "2026-11-12T20:50+08:00",
+     "used_pct": 63.0,
+     "left_pct": 37.0,
+     "resets_at": "2026-11-13T23:20+08:00",
      "status": "allowed"
     },
     "seven_day": {
-     "used_pct": 6.0,
-     "left_pct": 94.0,
+     "used_pct": 23.0,
+     "left_pct": 77.0,
      "resets_at": "2026-11-18T05:00+08:00",
      "status": "allowed"
     }
@@ -45,8 +45,8 @@
    "billing": "stripe_subscription",
    "subscription_created": "2026-06-04T18:28+08:00"
   },
-  "sessions": 61,
-  "tokens_total": 29137047
+  "sessions": 66,
+  "tokens_total": 29510606
  },
  "grokbot": {
   "as_of": "2026-11-11T00:38+08:00",
@@ -136,7 +136,7 @@
  },
  "by_category_tokens": {
   "投資系統": {
-   "Codex CLI": 26767853,
+   "Codex CLI": 27013367,
    "Claude Code": 0
   },
   "其他／未分類": {
@@ -145,7 +145,7 @@
   },
   "用量探測": {
    "Codex CLI": 0,
-   "Claude Code": 2054131
+   "Claude Code": 2427690
   },
   "記憶維護": {
    "Codex CLI": 0,
